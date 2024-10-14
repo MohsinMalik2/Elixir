@@ -17,7 +17,8 @@ defmodule ExampleMix.MixProject do
       # Mod define the entry point to trigger when we command mix or mix run because by default it only triggers
       # when compiling a new component or if there's a change in older one
       # mod: {ExampleMix, []},
-      mod: {GuessingGame, []},
+      # mod: {GuessingGame, []},
+      mod: {ListExamples, []},
       extra_applications: [:logger]
     ]
   end
