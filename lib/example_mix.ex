@@ -1,3 +1,10 @@
+defmodule Membership do
+  defstruct [:type, :price]
+end
+
+defmodule User do
+  defstruct [:name, :membership]
+end
 defmodule ExampleMix do
   use Application
 
@@ -20,12 +27,12 @@ defmodule ExampleMix do
 
     # ExampleMix.randomIDGeneration()
 
-    ExampleMix.main()
+    # ExampleMix.main()
     # ExampleMix.newYearTimeLeft()
-    # ExampleMix.tuplesUnderstanding()
+    ExampleMix.tuplesUnderstanding()
 
-    # Just to supervise the child function and one_for
-    # _one strategy dictate that if a function breaks only restart that particular function. That's what made Elixir Scalable
+    # Just to supervise the child function and
+    # one_for_one strategy dictate that if a function breaks only restart that particular function. That's what made Elixir Scalable
     Supervisor.start_link([], strategy: :one_for_one)
   end
 
@@ -44,31 +51,34 @@ defmodule ExampleMix do
     name  = "Mohsin"
     status = Enum.random([:gold, :silver, :bronze])
 
-    # if status === :gold do
-    #   IO.puts("Welcome to the Club, #{name} #{status}")
-    # else
-    #   IO.puts("Can't enter #{name}")
-    # end
+    if status === :gold do
+      IO.puts("Welcome to the Club, #{name} #{status}")
+    else
+      IO.puts("Can't enter #{name}")
+    end
 
-    # case status do
-    #   :gold -> IO.puts("Welcome to the Club, #{name} #{status}")
-    #   :silver -> IO.puts("Welcome to the Club, #{name} #{status}")
-    #   :bronze -> IO.puts("Welcome to the Club, #{name} #{status}")
-    #   _ -> IO.puts("Nothing found.")
-    # end
+    case status do
+      :gold -> IO.puts("Welcome to the Club, #{name} #{status}")
+      :silver -> IO.puts("Welcome to the Club, #{name} #{status}")
+      :bronze -> IO.puts("Welcome to the Club, #{name} #{status}")
+      _ -> IO.puts("Nothing found.")
+    end
 
     # Excape Characters (To be a part of string)
 
-    # IO.puts("This\nis\na\nmessage");
+    IO.puts("This\nis\na\nmessage");
 
     # to display code of key "a".
-    # IO.puts(?a);
+    IO.puts(?a);
 
     # Float built-in functions do exist like this ceil
-    # IO.puts(Float.ceil(0.5))
+    IO.puts(Float.ceil(0.5))
 
     # Integer built-in functions like this gcd
-    # IO.puts(Integer.gcd(25, 10))
+    IO.puts(Integer.gcd(25, 10))
+
+
+    ### Coumpound types like the types consist of multiple times.
 
     time = Time.new!(16, 30, 0, 0)
     date = Date.new!(2025, 1, 1)
@@ -76,12 +86,12 @@ defmodule ExampleMix do
 
     # IO.puts is throwing an error because
     # these compound types variables consists of multiple values so you cannot display them as a single entity
-    # IO.puts(time);
+    IO.puts(time);
 
     # So for development purposes we can use IO.inspect
-    # IO.inspect(time)
-    # IO.inspect(date)
-    # IO.inspect(date_time)
+    IO.inspect(time)
+    IO.inspect(date)
+    IO.inspect(date_time)
 
   end
 
@@ -109,48 +119,93 @@ defmodule ExampleMix do
 
   # Tuples: Tuples allow us to save multiple values in a single variable.
 
+  # Unlike array list or vector like in c++ tuples are more basic and static. It's usage is you can store multiple static values when you are defining a tuple
+  # It's not much of a dynamic values deifinition like array or vector
+  #Also, you can mix types in tuple like atom, strings, numbers but make sure the operations will be applied only on same types
+  # Like avg operation can only be implemented on numbers
+
   def tuplesUnderstanding do
 
-    membership = {:bronze, :silver}
-    membership = Tuple.append(membership, :gold)
+    # membership = {:bronze, :silver}
+    # membership = Tuple.append(membership, :gold)
 
-    IO.inspect(membership)
+    # IO.inspect("Memberships Tuple will be " <> membership)
 
-    prices =  {5, 20, 15}
-    avg = Tuple.sum(prices) / tuple_size(prices)
-    IO.puts(avg)
+    # prices =  {5, 20, 15}
+    # avg = Tuple.sum(prices) / tuple_size(prices)
+    # IO.puts("Average price of the membership will be " <> avg)
 
-    IO.puts("Average price from #{elem(membership, 0)} #{elem(membership, 1)} #{elem(membership, 2)} is #{avg}")
+    # IO.puts("Average price from #{elem(membership, 0)} #{elem(membership, 1)} #{elem(membership, 2)} is #{avg}")
 
-    user1 = {"Mohsin", :gold}
-    user2 = {"Hassan", :silver}
-    user3 = {"Ahmed", :bronze}
+    # user1 = {"Mohsin", :gold}
+    # user2 = {"Hassan", :silver}
+    # user3 = {"Ahmed", :bronze}
 
-    {name, membership} = user1
-    IO.puts("#{name} has a #{membership} membership.")
+    # {name, membership} = user1
+    # IO.puts("#{name} has a #{membership} membership.")
 
-    {name, membership} = user2
-    IO.puts("#{name} has a #{membership} membership.")
+    # {name, membership} = user2
+    # IO.puts("#{name} has a #{membership} membership.")
 
-    {name, membership} = user3
-    IO.puts("#{name} has a #{membership} membership.")
+    # {name, membership} = user3
+    # IO.puts("#{name} has a #{membership} membership.")
 
-    # Same Program with Each Loop
+    # # Same Program with Each Loop
 
-    users = [
-      {"Mohsin", :gold},
-      {"Hassan", :silver},
-      {"Ahmed", :bronze}
-    ]
+    # users = [
+    #   {"Mohsin", :gold},
+    #   {"Hassan", :silver},
+    #   {"Ahmed", :bronze}
+    # ]
 
-    Enum.each(users, fn {name, membership} ->  IO.puts("#{name} has a #{membership} membership.") end)
+    # Enum.each(users, fn {name, membership} ->  IO.puts("#{name} has a #{membership} membership.") end)
 
     # Map or Mapping in Elixir. This is a key value pair list where you can have multiple keys
     # that point to some values you can use those keys to look up for it's values. Used in many
+    # It's like a class or object in Javascript which have multiple key-value pairs. and like tuples they can be of different types
 
-    memberships = %{
+    # name = %{}   This is the way of defining a map or mapping key-value pairs in elixir
 
-    }
+    # memberships = %{
+    #   gold: :gold,
+    #   silver: :silver,
+    #   bronze: :bronze
+    # }
+
+    # prices = %{
+    #   gold: 152,
+    #   silver: 100,
+    #   bronze: 56
+    # }
+
+    # users = [
+    #   {"Mohsin", memberships.gold},
+    #   {"Hassan", memberships.silver},
+    #   {"Ahmed", memberships.bronze}
+    # ]
+
+    # Enum.each(users, fn {name, membership} ->  IO.puts("#{name} has a #{membership} membership paying #{prices[membership]}.") end)
+
+    # Another type will be Struct which is use to make your own type just like class or inheritance in Javascript. where we pre-define the
+    # structure of a variable. The way of doing this is first we define the struct outside the main component and then include that struct inside the main
+    # component like this  variable = %StructName{values}
+
+    gold_membership = %Membership{type: :gold, price: 25}
+    silver_membership = %Membership{type: :silver, price: 75}
+    bronze_membership = %Membership{type: :bronze, price: 95}
+
+    userList = [
+      %User{name: "Mohsin", membership: gold_membership},
+      %User{name: "Hassan", membership: silver_membership},
+      %User{name: "Ahmed", membership: bronze_membership},
+    ]
+
+    # Alitlle change when looping through struct or custom type as frequent use of % and exact names to get values
+
+    Enum.each(userList, fn %User{name: name, membership: membership} ->
+      IO.puts("#{name} has a #{membership.type} membership paying #{membership.price}.")
+    end)
+
 
   end
 
